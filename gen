@@ -15,4 +15,5 @@ find -name "m.htm" -exec sh -c '
 		sed -i "s,8\",8\"\ \/\>\<meta\ http-equiv=\"refresh\"\ content=\"0\;url=$redirect\"," ${1%/*}/index.html
 	fi
 ' sh {} \;
-sed "s/\.\.\///g" e/index.html >404.html
+sed "s/\.\.\///g" e/index.html >err.html
+cp err.html 404.html
