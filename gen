@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# generate site
+find -name "m.htm" -exec sh -c '
+	title=$(head -n1 ${1%/*}/m.htm | cut -d, -f1)
+	subdir=$(head -n1 ${1%/*}/m.htm | cut -d, -f2)
+	redirect=$(head -n1 ${1%/*}/m.htm | cut -d, -f3)
+	(cat h.htm; tail -n+2 ${1%/*}/m.htm; cat f.htm) >${1%/*}/index.html
+	sed -i "s,<title>,<title>$title," ${1%/*}/index.html
+	sed -i "s,href=\"//,href=\"http://,g" ${1%/*}/index.html
+	sed -i "s,href=\"/,href=\"$subdir,g" ${1%/*}/index.html
+	sed -i "s,src=\"/,src=\"$subdir,g" ${1%/*}/index.html
+	sed -zi "s,\n,,g" ${1%/*}/index.html
+	if [ "$(head -n1 ${1%/*}/m.htm | tr -cd ",")" = ",," ];
+	then
+		sed -i "s,8\",8\"\ \/\>\<meta\ http-equiv=\"refresh\"\ content=\"0\;url=$redirect\"," ${1%/*}/index.html
+	fi
+' sh {} \;
+sed "s/\.\.\///g" e/index.html >404.html
