@@ -15,6 +15,12 @@ on during my break after the fall semester of 2024 ended.
 It's turned out to be a fantastic excuse to learn HTML,
 CSS, and Git
 
+2025/01/02
+I programmed a shell script to automatically generate the
+header and footer of each page. This gives me most of the
+convenience and consistency of an SSG, while still keeping
+the fine-tuned control of HTML for the main page content
+
 2024/10/16
 There's now sitemap navigation which is nice for jumping to
 a specific page, it's also great for documenting the purpose
